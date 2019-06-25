@@ -16,10 +16,47 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from task import views
+from django.contrib.auth import views as auth_views
+
+from django.views.generic import TemplateView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('task/<int:id>', views.show_Class_Task),
+
+    path('task/<int:id>/edit/', views.edit_Class_Task),
+
+    path('task/<int:id>/confirm/', views.confirm_Class_Task),
+
+    path('task/<int:id>/delete/', views.delete_task),
+
+    path('task/<int:id>/<int:id_chek_list>/', views.show_ChekList),
+
+    path('task/<int:id>/<int:id_chek_list>/delete_CheckItem/', views.delete_CheckItem),
+
+    path('task/<int:id>//NewChek', views.add_ChekList),
+
+    path('login/', auth_views.LoginView.as_view()),
+
+    path('accounts/login/', auth_views.LoginView.as_view()),
+
+    path('logout/', auth_views.LogoutView.as_view()),
+
+    path('register/', views.register),
+
+    path('reset_user/', views.reset_user),
+
+   # path('sendEmail/', views.send_mail()),
+
+    path('password_reset_email/', views.MyPasswordResetView, name='password_reset'),
+
+    path('password_reset/', views.MyPasswordResetView, name='password_reset'),
+
     path('', views.index),
 
+    path('home/', views.index),
 
+    path('task/new/', views.add_new_task),
 ]

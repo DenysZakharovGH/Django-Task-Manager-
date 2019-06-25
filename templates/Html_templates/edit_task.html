@@ -1,0 +1,13 @@
+{% extends 'Html_templates/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+     <title>Add task</title>
+  <form method="post">
+     {% csrf_token %}
+     { {cheklist | crispy }}
+     {{ form | crispy }}
+    <button type="submit" class="btn btn-success">Save task</button>
+  </form>
+{% endblock %}

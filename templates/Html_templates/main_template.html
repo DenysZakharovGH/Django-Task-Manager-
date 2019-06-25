@@ -1,13 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'Html_templates/base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
 
+<h2>According tasks</h2>
+<a href="/task/new/" class="btn btn-outline-success my-2 my-sm-0">Add Task</a>
+<form>
+    <table class="table table-striped">
+        <tr><label>Search for:</label></tr>
+        <div class="col">
+                <div class="form-check">
+                <tr><td>
+            <input type="checkbox" value="on" name="free">
+                     <label for="defaultCheck1">Show free tasks</label>
+    </td></tr>
+    <tr><td>
+        <input type="checkbox" value="on" name="my">
+                     <label for="defaultCheck1">Show my tasks</label>
+    </td></tr>
 
-{% endblock content %}
-</body>
-</html>
+</div>
+</div>
+</table>
+    <table class="table table-striped">
+    <tr>
+        <td>
+            <input id="task_name" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="task_name" value="">
+        </td>
+
+        <td> choose from :
+                            <input type="number" name="int_min" value="0" min="0" max="100" step="1">
+                to :
+                            <input type="number" name="int_max" value="100" min="0" max="100" step="1">
+        </td>
+
+        <td>
+
+
+        </td>
+     <td>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </td>
+    </tr>
+    </table>
+</form>
+{% if task %}
+<table class="table table-hover">
+    <tr>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Deadline</td>
+        <td>Doer</td>
+        <td>Progress</td>
+    </tr>
+
+    {% for task in task %}
+    <tr>
+        <td>
+            <a href="/task/{{ task.id }}">{{ task }}</a>
+        </td>
+        <td>{{ task.content }}</td>
+        <td>{{ task.deadline }}</td>
+        <td>{{ task.doer }}</td>
+        <td>
+            <div class="progress-bar  progress-bar-striped active" role="progressbar" aria-valuenow="40"
+                            aria-valuemin="0" aria-valuemax="40" style="width:{{ task.stasus_in_percents }}%"><font size="2" color="black" face="Arial">
+                                {{ task.stasus_in_percents }}%</font></div>
+        </td>
+    </tr>
+    {% endfor %}
+    {%else%}
+<div class="alert alert-danger" role="alert">
+  Nothing found, choise something else!
+</div>
+{%endif%}
+
+</table>
+{% endblock %}
