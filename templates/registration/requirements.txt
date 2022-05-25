@@ -33,7 +33,7 @@ prov==1.5.3
 pycpd==1.0.5
 pydot==1.4.1
 pydotplus==2.0.2
-PyJWT==1.7.1
+PyJWT==2.4.0
 pyparsing==2.4.0
 PySiTK==0.2.14
 python-dateutil==2.8.0
